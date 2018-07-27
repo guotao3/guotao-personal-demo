@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.dao.INewsDao" >
+	<resultMap id="NewsResultMap" type="cc.entity.NewsEntity" >
+	    <result column="ID" property="id" jdbcType="VARCHAR" />
+	    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+	    <result column="WRITER" property="writer" jdbcType="VARCHAR" />
+	    <result column="URL" property="url" jdbcType="VARCHAR" />
+	    <result column="EN_CONTENT" property="enContent" jdbcType="VARCHAR" />
+	    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+	    <result column="ACTIVE" property="active" jdbcType="TINYINT" />
+	    <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
+	    <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR" />
+	    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR" />
+	    <result column="UPDATE_USER_NAME" property="updateUserName" jdbcType="VARCHAR" />
+	    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+	    <result column="VERSION" property="version" jdbcType="NUMERIC" />
+  	</resultMap>
+  	
+ 	<sql id="query_user_param" >
+ 		U.ID,
+    	U.TITLE,
+    	U.WRITER,
+    	U.URL,
+    	U.CONTENT,
+    	U.EN_CONTENT,
+    	U.ACTIVE,
+    	U.CREATE_USER_ID,
+    	U.CREATE_USER_NAME,
+    	U.CREATE_TIME,
+    	U.UPDATE_USER_ID,
+    	U.UPDATE_USER_NAME,
+    	U.UPDATE_TIME,
+    	U.VERSION
+  	</sql>
+  	
+  	<insert id="insert" parameterType="cc.entity.NewsEntity">
+	 	INSERT INTO T_NEWS(
+    		ID,
+	    	TITLE,
+	    	WRITER,
+	    	URL,
+	    	CONTENT,
+	    	EN_CONTENT,
+	    	ACTIVE,
+	    	CREATE_USER_ID,
+	    	CREATE_USER_NAME,
+	    	CREATE_TIME,
+	    	VERSION
+		) VALUES	
+	(	
+		#{id, jdbcType=VARCHAR},		
+		#{title, jdbcType=VARCHAR},
+		#{writer, jdbcType=VARCHAR},
+		#{url, jdbcType=VARCHAR},
+		#{content, jdbcType=VARCHAR},
+		#{enContent, jdbcType=VARCHAR},
+		#{active, jdbcType=TINYINT},	
+		#{createUserId, jdbcType=VARCHAR},
+		#{createUserName, jdbcType=VARCHAR},
+		#{createTime, jdbcType=TIMESTAMP},
+		#{version, jdbcType=NUMERIC}
+	)
+	</insert>
+	
+  	<update id="update" parameterType="cc.entity.NewsEntity" >
+    	UPDATE T_NEWS U SET
+      	<if test="title != null and title != ''" >
+        	U.TITLE = #{title, jdbcType=VARCHAR},
+      	</if>
+      	<if test="writer != null and writer != ''" >
+        	U.WRITER = #{writer, jdbcType=VARCHAR},
+      	</if>
+      	<if test="url != null and url != ''" >
+        	U.URL = #{url, jdbcType=VARCHAR},
+      	</if>
+      	<if test="content != null and content != ''" >
+        	U.CONTENT = #{content, jdbcType=VARCHAR},
+      	</if>
+      	<if test="enContent != null and enContent != ''" >
+        	U.EN_CONTENT = #{enContent, jdbcType=VARCHAR},
+      	</if>
+      	<if test="active != null and active != ''" >
+        	U.ACTIVE = #{active, jdbcType=TINYINT},
+      	</if>
+      	<if test="createUserId != null and createUserId != ''" >
+        	U.CREATE_USER_ID = #{createUserId, jdbcType=VARCHAR},
+      	</if>
+      	<if test="createUserName != null and createUserName != ''" >
+        	U.CREATE_USER_NAME = #{createUserName, jdbcType=VARCHAR},
+      	</if>
+      	<if test="createTime != null and createTime != ''" >
+        	U.CREATE_TIME = #{createTime, jdbcType=TIMESTAMP},
+      	</if>
+      	<if test="updateUserId != null and updateUserId != ''" >
+        	U.UPDATE_USER_ID = #{updateUserId, jdbcType=VARCHAR},
+      	</if>
+      	<if test="updateUserName != null and updateUserName != ''" >
+        	U.UPDATE_USER_NAME = #{updateUserName, jdbcType=VARCHAR},
+      	</if>
+      	<if test="updateTime != null " >
+        	U.UPDATE_TIME = #{updateTime, jdbcType=TIMESTAMP},
+      	</if>
+		U.VERSION = U.VERSION + 1
+		<where>
+	    	U.ID = #{id, jdbcType=VARCHAR}
+		</where>
+  	</update>
+  	
+  	<update id="delete" parameterType="map" >
+	    UPDATE T_NEWS U SET
+	    U.ACTIVE = '0'
+	  	<where>
+	    	U.ACTIVE = '1'
+	    	AND
+			U.ID = #{id, jdbcType=VARCHAR}	
+		</where>
+  	</update>
+  	
+
+  	<select id="queryList" resultMap="NewsResultMap" parameterType="java.util.Map" >
+	    SELECT 
+	    <include refid="query_user_param" />
+	    FROM T_NEWS U
+	    <where>
+	    	U.ACTIVE = '1'
+			<if test="title != null and title != ''" >
+	        	AND U.TITLE = #{title, jdbcType=VARCHAR}
+	      	</if>
+	      	<if test="writer != null and writer != ''" >
+	        	AND U.WRITER = #{writer, jdbcType=VARCHAR}
+	      	</if>
+	      	<if test="id != null and id != ''" >
+	        	AND U.ID = #{id, jdbcType=VARCHAR}
+	      	</if>
+	      	ORDER BY U.CREATE_TIME DESC
+		</where>
+		limit 0,10
+ 	</select>
+  	
+    <select id="count" resultType="java.lang.Integer" parameterType="java.util.Map">
+   		SELECT COUNT(*)  FROM T_NEWS U
+	    <where>
+	    	U.ACTIVE = '1'
+		</where>
+  	</select>
+  	
+  	<select id="queryPage" resultMap="NewsResultMap" parameterType="java.util.Map">
+		SELECT
+		<include refid="query_user_param"/>
+		 FROM T_NEWS U
+		<where>
+			U.ACTIVE = '1'
+	      	ORDER BY U.CREATE_TIME DESC
+	      	
+			limit #{startIndex, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER}
+		</where>
+	</select>
+	
+</mapper>

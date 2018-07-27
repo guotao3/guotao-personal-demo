@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<decorators defaultdir="/WEB-INF/views">
+
+<!--	<excludes>
+		<pattern>/user/login.html</pattern>
+		<pattern>/exclude/*</pattern>
+	</excludes>
+
+	<decorator name="motian_main" page="decorators/decorator.ftl">
+		<pattern>/company/*.html</pattern>
+		<pattern>/pay/*.html</pattern>
+		<pattern>/help/*.html</pattern>
+		<pattern>/notice/*.html</pattern>
+	</decorator>
+
+	<decorator name="none">
+		<pattern>/WEB-INF/views/user/login.ftl</pattern>
+	</decorator>-->
+
+</decorators>

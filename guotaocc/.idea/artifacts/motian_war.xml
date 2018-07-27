@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="motian:war">
+    <output-path>$PROJECT_DIR$/../motian/target</output-path>
+    <root id="archive" name="motian.war">
+      <element id="artifact" artifact-name="motian:war exploded" />
+    </root>
+  </artifact>
+</component>

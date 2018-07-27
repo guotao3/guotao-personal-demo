@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.dao.IVisitorDao" >
+	<resultMap id="NewsResultMap" type="cc.entity.VisitorEntity" >
+	    <result column="ID" property="id" jdbcType="VARCHAR" />
+	    <result column="VISITOR_NAME" property="visitorName" jdbcType="VARCHAR" />
+	    <result column="EMAIL" property="eamil" jdbcType="VARCHAR" />
+	    <result column="SUBJECT" property="subject" jdbcType="VARCHAR" />
+	    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+	    <result column="ACTIVE" property="active" jdbcType="TINYINT" />
+	    <result column="CREATE_USER_ID" property="createUserId" jdbcType="VARCHAR" />
+	    <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR" />
+	    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR" />
+	    <result column="UPDATE_USER_NAME" property="updateUserName" jdbcType="VARCHAR" />
+	    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+	    <result column="VERSION" property="version" jdbcType="NUMERIC" />
+  	</resultMap>
+  	
+ 	<sql id="query_user_param" >
+ 		U.ID,
+    	U.VISITOR_NAME,
+    	U.EMAIL,
+    	U.SUBJECT,
+    	U.CONTENT,
+    	U.ACTIVE,
+    	U.CREATE_USER_ID,
+    	U.CREATE_USER_NAME,
+    	U.CREATE_TIME,
+    	U.UPDATE_USER_ID,
+    	U.UPDATE_USER_NAME,
+    	U.UPDATE_TIME,
+    	U.VERSION
+  	</sql>
+  	
+  	<insert id="insert" parameterType="cc.entity.VisitorEntity">
+	 	INSERT INTO t_visitor(
+    		ID,
+	    	VISITOR_NAME,
+	    	EMAIL,
+	    	SUBJECT,
+	    	CONTENT,
+	    	ACTIVE,
+	    	CREATE_USER_ID,
+	    	CREATE_USER_NAME,
+	    	CREATE_TIME,
+	    	VERSION
+		) VALUES	
+	(	
+		#{id, jdbcType=VARCHAR},		
+		#{visitorName, jdbcType=VARCHAR},
+		#{email, jdbcType=VARCHAR},
+		#{subject, jdbcType=VARCHAR},
+		#{content, jdbcType=VARCHAR},
+		#{active, jdbcType=TINYINT},	
+		#{createUserId, jdbcType=VARCHAR},
+		#{createUserName, jdbcType=VARCHAR},
+		#{createTime, jdbcType=TIMESTAMP},
+		#{version, jdbcType=NUMERIC}
+	)
+	</insert>
+	
+  
+</mapper>

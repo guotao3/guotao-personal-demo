@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.dao.IUserDao">
+	<resultMap id="UserResultMap" type="cc.entity.UserEntity">
+		<result column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="WX_ID" property="wxId" jdbcType="VARCHAR" />
+		<result column="USER_ID_NUM" property="userIdNum" jdbcType="VARCHAR" />
+		<result column="USER_REAL_NAME" property="userRealName"
+			jdbcType="VARCHAR" />
+		<result column="USER_PASSWORD" property="userPassword"
+			jdbcType="VARCHAR" />
+		<result column="USER_MOBILE" property="userMobile" jdbcType="VARCHAR" />
+		<result column="USER_EMAIL" property="userEmail" jdbcType="VARCHAR" />
+		<result column="SHOP_INTEGRAL" property="shopIntegral"
+			jdbcType="VARCHAR" />
+		<result column="ACTIVE_INTEGRAL" property="activeIntegral"
+			jdbcType="VARCHAR" />
+		<result column="REGISTER_INTEGRAL" property="registerIntegral"
+			jdbcType="VARCHAR" />
+		<result column="FUND" property="fund" jdbcType="VARCHAR" />
+		<result column="BONUS" property="bonus" jdbcType="VARCHAR" />
+		<result column="OTHER_BUY_INTEGRAL" property="otherBuyIntegral"
+			jdbcType="VARCHAR" />
+		<result column="STOCK" property="stock" jdbcType="VARCHAR" />
+		<result column="INVESTMENT" property="investment" jdbcType="VARCHAR" />
+		<result column="USER_PARENT_NAME" property="userParentName"
+			jdbcType="VARCHAR" />
+		<result column="ID_TYPE" property="IDType" jdbcType="VARCHAR" />
+		<result column="COUNTRY" property="country" jdbcType="VARCHAR" />
+		<result column="ACTIVE" property="active" jdbcType="TINYINT" />
+		<result column="CREATE_USER_ID" property="createUserId"
+			jdbcType="VARCHAR" />
+		<result column="CREATE_USER_NAME" property="createUserName"
+			jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_USER_ID" property="updateUserId"
+			jdbcType="VARCHAR" />
+		<result column="UPDATE_USER_NAME" property="updateUserName"
+			jdbcType="VARCHAR" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="VERSION" property="version" jdbcType="NUMERIC" />
+	</resultMap>
+
+
+	<insert id="insert" parameterType="cc.entity.UserEntity">
+		INSERT INTO T_USER(
+		ID,
+		WX_ID,
+		USER_ID_NUM,
+		USER_REAL_NAME,
+		USER_PASSWORD,
+		USER_MOBILE,
+		USER_EMAIL,
+		SHOP_INTEGRAL,
+		ACTIVE_INTEGRAL,
+		REGISTER_INTEGRAL,
+		FUND,
+		BONUS,
+		OTHER_BUY_INTEGRAL,
+		STOCK,
+		INVESTMENT,
+		USER_PARENT_NAME,
+		COUNTRY,
+		ID_TYPE,
+		ACTIVE,
+		CREATE_USER_ID,
+		CREATE_USER_NAME,
+		CREATE_TIME,
+		VERSION
+		) VALUES
+		(
+		#{id, jdbcType=VARCHAR},
+		#{wxId, jdbcType=VARCHAR},
+		#{userIdNum, jdbcType=VARCHAR},
+		#{userRealName,
+		jdbcType=VARCHAR},
+		#{userPassword, jdbcType=VARCHAR},
+		#{userMobile,
+		jdbcType=VARCHAR},
+		#{userEmail, jdbcType=VARCHAR},
+		#{shopIntegral,
+		jdbcType=VARCHAR},
+		#{activeIntegral, jdbcType=VARCHAR},
+		#{registerIntegral, jdbcType=VARCHAR},
+		#{fund, jdbcType=VARCHAR},
+		#{bonus, jdbcType=VARCHAR},
+		#{otherBuyIntegral, jdbcType=VARCHAR},
+		#{stock, jdbcType=VARCHAR},
+		#{investment, jdbcType=VARCHAR},
+		#{userParentName, jdbcType=VARCHAR},
+		#{country, jdbcType=VARCHAR},
+		#{IDType, jdbcType=VARCHAR},
+		#{active, jdbcType=TINYINT},
+		#{createUserId, jdbcType=VARCHAR},
+		#{createUserName, jdbcType=VARCHAR},
+		#{createTime, jdbcType=TIMESTAMP},
+		#{version, jdbcType=NUMERIC}
+		)
+	</insert>
+
+	<update id="update" parameterType="cc.entity.UserEntity">
+		UPDATE T_USER U SET
+		<if test="wxId != null and wxId != ''">
+			U.WX_ID = #{wxId, jdbcType=VARCHAR},
+		</if>
+		<if test="userIdNum != null and userIdNum != ''">
+			U.USER_ID_NUM = #{userIdNum, jdbcType=VARCHAR},
+		</if>
+		<if test="userRealName != null and userRealName != ''">
+			U.USER_REAL_NAME = #{userRealName, jdbcType=VARCHAR},
+		</if>
+		<if test="userPassword != null and userPassword != ''">
+			U.USER_PASSWORD = #{userPassword, jdbcType=VARCHAR},
+		</if>
+		<if test="userMobile != null and userMobile != ''">
+			U.USER_MOBILE = #{userMobile, jdbcType=VARCHAR},
+		</if>
+		<if test="userEmail != null and userEmail != ''">
+			U.USER_EMAIL = #{userEmail, jdbcType=VARCHAR},
+		</if>
+		<if test="shopIntegral != null and shopIntegral != ''">
+			U.SHOP_INTEGRAL = #{shopIntegral, jdbcType=VARCHAR},
+		</if>
+		<if test="activeIntegral != null and activeIntegral != ''">
+			U.ACTIVE_INTEGRAL = #{activeIntegral, jdbcType=VARCHAR},
+		</if>
+		<if test="registerIntegral != null and registerIntegral != ''">
+			U.REGISTER_INTEGRAL = #{registerIntegral, jdbcType=VARCHAR},
+		</if>
+		<if test="fund != null and fund != ''">
+			U.FUND = #{fund, jdbcType=VARCHAR},
+		</if>
+		<if test="bonus != null and bonus != ''">
+			U.BONUS = #{bonus, jdbcType=VARCHAR},
+		</if>
+		<if test="otherBuyIntegral != null and otherBuyIntegral != ''">
+			U.OTHER_BUY_INTEGRAL = #{otherBuyIntegral, jdbcType=VARCHAR},
+		</if>
+		<if test="stock != null and stock != ''">
+			U.STOCK = #{stock, jdbcType=VARCHAR},
+		</if>
+		<if test="investment != null and investment != ''">
+			U.INVESTMENT = #{investment, jdbcType=VARCHAR},
+		</if>
+		<if test="userParentName != null and userParentName != ''">
+			U.USER_PARENT_NAME = #{userParentName, jdbcType=VARCHAR},
+		</if>
+		<if test="country != null and country != ''">
+			U.COUNTRY = #{country, jdbcType=VARCHAR},
+		</if>
+		<if test="IDType != null and IDType != ''">
+			U.ID_TYPE = #{IDType, jdbcType=VARCHAR},
+		</if>
+		<if test="active != null and active != ''">
+			U.ACTIVE = #{active, jdbcType=TINYINT},
+		</if>
+		<if test="createUserId != null and createUserId != ''">
+			U.CREATE_USER_ID = #{createUserId, jdbcType=VARCHAR},
+		</if>
+		<if test="createUserName != null and createUserName != ''">
+			U.CREATE_USER_NAME = #{createUserName, jdbcType=VARCHAR},
+		</if>
+		<if test="createTime != null and createTime != ''">
+			U.CREATE_TIME = #{createTime, jdbcType=TIMESTAMP},
+		</if>
+		<if test="updateUserId != null and updateUserId != ''">
+			U.UPDATE_USER_ID = #{updateUserId, jdbcType=VARCHAR},
+		</if>
+		<if test="updateUserName != null and updateUserName != ''">
+			U.UPDATE_USER_NAME = #{updateUserName, jdbcType=VARCHAR},
+		</if>
+		<if test="updateTime != null and updateTime != ''">
+			U.UPDATE_TIME = #{updateTime, jdbcType=TIMESTAMP},
+		</if>
+		U.VERSION = U.VERSION + 1
+		<where>
+			U.USER_MOBILE = #{userMobile, jdbcType=VARCHAR}
+		</where>
+	</update>
+
+
+	<update id="delete" parameterType="map">
+		UPDATE T_USER U SET
+		U.ACTIVE = '0'
+		<where>
+			U.USER_MOBILE = #{userMobile, jdbcType=VARCHAR}
+		</where>
+	</update>
+
+	<select id="queryList" resultMap="UserResultMap" parameterType="java.util.Map">
+		SELECT
+		*
+		FROM T_USER U
+		<where>
+			<if test="wxId != null and wxId != ''">
+				AND U.WX_ID = #{wxId, jdbcType=VARCHAR}
+			</if>
+			<if test="userIdNum != null and userIdNum != ''">
+				AND U.USER_ID_NUM = #{userIdNum, jdbcType=VARCHAR}
+			</if>
+			<if test="userRealName != null and userRealName != ''">
+				AND U.USER_REAL_NAME = #{userRealName, jdbcType=VARCHAR}
+			</if>
+			<if test="userPassword != null and userPassword != ''">
+				AND U.USER_PASSWORD = #{userPassword, jdbcType=VARCHAR}
+			</if>
+			<if test="userMobile != null and userMobile != ''">
+				AND U.USER_MOBILE = #{userMobile, jdbcType=VARCHAR}
+			</if>
+			<if test="userEmail != null and userEmail != ''">
+				AND U.USER_EMAIL = #{userEmail, jdbcType=VARCHAR}
+			</if>
+			<if test="shopIntegral != null and shopIntegral != ''">
+				AND U.SHOP_INTEGRAL = #{shopIntegral, jdbcType=VARCHAR}
+			</if>
+			<if test="activeIntegral != null and activeIntegral != ''">
+				AND U.ACTIVE_INTEGRAL = #{activeIntegral, jdbcType=TINYINT}
+			</if>
+			<if test="investment != null and investment != ''">
+				AND U.INVESTMENT = #{investment, jdbcType=TINYINT}
+			</if>
+			<if test="userParentName != null and userParentName != ''">
+				AND U.USER_PARENT_NAME = #{userParentName, jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<select id="count" resultType="java.lang.Integer" parameterType="java.util.Map">
+		SELECT COUNT(*) FROM T_USER U
+		<where>
+			<if test="wxId != null and wxId != ''">
+				AND U.WX_ID = #{wxId, jdbcType=VARCHAR}
+			</if>
+			<if test="userIdNum != null and userIdNum != ''">
+				AND U.USER_ID_NUM = #{userIdNum, jdbcType=VARCHAR}
+			</if>
+			<if test="userRealName != null and userRealName != ''">
+				AND U.USER_REAL_NAME = #{userRealName, jdbcType=VARCHAR}
+			</if>
+			<if test="userPassword != null and userPassword != ''">
+				AND U.USER_PASSWORD = #{userPassword, jdbcType=VARCHAR}
+			</if>
+			<if test="userMobile != null and userMobile != ''">
+				AND U.USER_MOBILE = #{userMobile, jdbcType=VARCHAR}
+			</if>
+			<if test="userEmail != null and userEmail != ''">
+				AND U.USER_EMAIL = #{userEmail, jdbcType=VARCHAR}
+			</if>
+			<if test="shopIntegral != null and shopIntegral != ''">
+				AND U.SHOP_INTEGRAL = #{shopIntegral, jdbcType=VARCHAR}
+			</if>
+			<if test="activeIntegral != null and activeIntegral != ''">
+				AND U.ACTIVE_INTEGRAL = #{activeIntegral, jdbcType=TINYINT}
+			</if>
+			<if test="investment != null and investment != ''">
+				AND U.INVESTMENT = #{investment, jdbcType=TINYINT}
+			</if>
+			<if test="userParentName != null and userParentName != ''">
+				AND U.USER_PARENT_NAME = #{userParentName, jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+</mapper>
